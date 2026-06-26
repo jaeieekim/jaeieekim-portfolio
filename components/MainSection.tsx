@@ -94,7 +94,7 @@ export default function MainSection() {
         /* ── Analytics ── */
         .ms-analytics {
           position: absolute;
-          bottom: 31.4vh;
+          bottom: 24vh;
           left: 24px;
         }
         .ms-analytics-label {
@@ -159,7 +159,7 @@ export default function MainSection() {
         /* ── Arrow ── */
         .ms-arrow {
           position: absolute;
-          bottom: 7.6vh;
+          bottom: calc(7.6vh - 6px);
           left: 50%;
           transform: translateX(-50%);
           background: transparent;

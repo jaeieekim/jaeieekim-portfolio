@@ -177,8 +177,8 @@ export default function HeroSection() {
     }
     const labelX = leftmost - 20;
     // 라벨 0(MAIN)=가장 아래, 라벨 3(CONTACT)=가장 위에 고정하고 사이 간격을 균등 분배
-    const bottomCssY = 0.5 * height - STONE_DEFINITIONS[0].y * minDim - 8 + 60;
-    const topCssY    = 0.5 * height - STONE_DEFINITIONS[3].y * minDim - 8 + 60;
+    const bottomCssY = 0.5 * height - STONE_DEFINITIONS[0].y * minDim - 8 + 40;
+    const topCssY    = 0.5 * height - STONE_DEFINITIONS[3].y * minDim - 8 + 40;
     const step = (bottomCssY - topCssY) / (SECTIONS.length - 1) - 10;
     labels.forEach((label, i) => {
       const cssY = topCssY + (SECTIONS.length - 1 - i) * step;
@@ -375,7 +375,6 @@ export default function HeroSection() {
       <style>{`
         .floor-label.label-hovered,
         .floor-label.label-active { color: var(--color-accent) !important; }
-        @media (max-width: 639px) { .floor-label { display: none; } }
       `}</style>
     </div>
   );
