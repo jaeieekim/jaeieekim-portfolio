@@ -4,10 +4,10 @@ import HamburgerMenu from "@/components/HamburgerMenu";
 
 export const metadata: Metadata = {
   title: "JaeieeKim Portfolio",
-  description: "A monolithic structure comprised of granular instability.",
+  description: "Product Designer Portfolio",
   openGraph: {
     title: "JaeieeKim Portfolio",
-    description: "A monolithic structure comprised of granular instability.",
+    description: "Product Designer Portfolio",
     url: "https://jaeieekim-portfolio.vercel.app",
     siteName: "JaeieeKim Portfolio",
     locale: "ko_KR",
