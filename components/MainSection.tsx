@@ -1,6 +1,31 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
+function timeAgo(timestamp: number): string {
+  const diff = Math.floor((Date.now() - timestamp) / 1000);
+  if (diff < 60) return `${diff}s ago`;
+  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+  return `${Math.floor(diff / 86400)}d ago`;
+}
+
 export default function MainSection() {
+  const [stats, setStats] = useState({ total: "—", today: "—", lastVisit: "—" });
+
+  useEffect(() => {
+    fetch("/api/track", { method: "POST" })
+      .then((r) => r.json())
+      .then((d) => {
+        setStats({
+          total: d.total.toLocaleString(),
+          today: d.today.toLocaleString(),
+          lastVisit: d.lastVisit ? timeAgo(d.lastVisit) : "—",
+        });
+      })
+      .catch(() => {});
+  }, []);
+
   const scrollToProject = () => {
     document.getElementById("project")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -211,9 +236,9 @@ export default function MainSection() {
       <div className="ms-analytics">
         <p className="ms-analytics-label">ANALYTICS</p>
         {[
-          { label: "TODAY'S VIEWS", value: "—" },
-          { label: "TOTAL VIEWS",   value: "—" },
-          { label: "LAST VISITOR",  value: "—" },
+          { label: "TODAY'S VIEWS", value: stats.today },
+          { label: "TOTAL VIEWS",   value: stats.total },
+          { label: "LAST VISITOR",  value: stats.lastVisit },
         ].map((stat) => (
           <div key={stat.label} className="ms-stat-row">
             <span className="ms-stat-label">{stat.label}</span>
