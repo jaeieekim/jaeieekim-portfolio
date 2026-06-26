@@ -64,8 +64,8 @@ export default function MainSection() {
           position: absolute;
           top: 60px;
           left: 24px;
-          right: auto;
-          max-width: 54vw;
+          right: 24px;
+          max-width: calc(100vw - 48px);
         }
 
         /* ── Title ── */

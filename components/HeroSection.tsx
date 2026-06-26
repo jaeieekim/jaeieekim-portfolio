@@ -375,6 +375,7 @@ export default function HeroSection() {
       <style>{`
         .floor-label.label-hovered,
         .floor-label.label-active { color: var(--color-accent) !important; }
+        @media (max-width: 639px) { .floor-label { display: none; } }
       `}</style>
     </div>
   );
