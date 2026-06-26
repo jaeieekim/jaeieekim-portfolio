@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     siteName: "JaeieeKim Portfolio",
     locale: "ko_KR",
     type: "website",
+    images: [{ url: "https://jaeieekim-portfolio.vercel.app/og-image.png" }],
   },
 };
 
