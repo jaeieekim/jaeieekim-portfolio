@@ -3,8 +3,16 @@ import "./globals.css";
 import HamburgerMenu from "@/components/HamburgerMenu";
 
 export const metadata: Metadata = {
-  title: "Cornerstone — 김재이 포트폴리오",
+  title: "JaeieeKim Portfolio",
   description: "A monolithic structure comprised of granular instability.",
+  openGraph: {
+    title: "JaeieeKim Portfolio",
+    description: "A monolithic structure comprised of granular instability.",
+    url: "https://jaeieekim-portfolio.vercel.app",
+    siteName: "JaeieeKim Portfolio",
+    locale: "ko_KR",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
