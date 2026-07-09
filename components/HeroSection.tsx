@@ -328,12 +328,12 @@ export default function HeroSection() {
       {/* WebGL Canvas */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 z-10"
-        style={{ width: "100%", height: "100%", transform: "translateX(30px)" }}
+        className="absolute inset-0 z-10 hero-shift"
+        style={{ width: "100%", height: "100%" }}
       />
 
       {/* Floor labels (absolute-positioned by JS) */}
-      <div ref={labelContainerRef} className="absolute inset-0 z-30 pointer-events-none" style={{ transform: "translateX(30px)" }}>
+      <div ref={labelContainerRef} className="absolute inset-0 z-30 pointer-events-none hero-shift">
         {SECTIONS.map((s, i) => (
           <button
             key={s.id}
@@ -375,6 +375,11 @@ export default function HeroSection() {
       <style>{`
         .floor-label.label-hovered,
         .floor-label.label-active { color: var(--color-accent) !important; }
+
+        .hero-shift { transform: translate(40px, 20px); }
+        @media (min-width: 640px) {
+          .hero-shift { transform: translate(30px, 20px); }
+        }
       `}</style>
     </div>
   );

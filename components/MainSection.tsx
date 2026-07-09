@@ -91,6 +91,10 @@ export default function MainSection() {
           word-break: keep-all;
         }
 
+        .ms-break-desktop {
+          display: none;
+        }
+
         /* ── Analytics ── */
         .ms-analytics {
           position: absolute;
@@ -187,14 +191,22 @@ export default function MainSection() {
           }
 
           .ms-title {
-            font-size: 48px;
+            font-size: 36px;
             line-height: 1.4;
           }
 
           .ms-desc {
-            max-width: 425px;
-            font-size: 17px;
+            max-width: 360px;
+            font-size: 15px;
             color: var(--color-fg);
+          }
+
+          .ms-break-mobile {
+            display: none;
+          }
+
+          .ms-break-desktop {
+            display: inline;
           }
 
           .ms-analytics {
@@ -226,9 +238,8 @@ export default function MainSection() {
           주춧돌 같은 디자이너, 김재이입니다.
         </h2>
         <p className="ms-desc">
-          <span style={{ whiteSpace: "nowrap" }}>데이터를 통해 문제의 맥락을 짚어내고 화면 구조를 설계합니다.</span><br />
-          단단한 기획력을 바탕으로 미세한 예외 상황까지 고민하고,{" "}
-          끊임없이 실험하고 배우며 탄탄한 경험을 쌓아가는 프로덕트 디자이너 김재이입니다.
+          <span style={{ whiteSpace: "nowrap" }}>데이터로 문제의 맥락을 찾고 디지털 경험을 설계합니다.</span><br /> 디자인의 설득 근거를 바탕으로 화면의 완성도, 작은 예외 상황까지 고민합니다.{" "}
+          실험과 검증을 통해 프로덕트의 기반을 단단히 다져가는 디자이너입니다.
         </p>
       </div>
 

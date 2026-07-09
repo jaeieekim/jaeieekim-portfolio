@@ -22,6 +22,7 @@ const SKILLS: Record<string, string[]> = {
   Design: ["Figma", "Photoshop", "Illustrator", "Premiere pro"],
   AI: ["Claude code", "Cursor", "Open AI", "Lovable", "Gemini", "Antigravity"],
   Document: ["Powerpoint", "Ms Excel", "Spreadsheet", "Notion"],
+  Data: ["GA4", "Mixpanel"],
 };
 
 function MapPinIcon() {
@@ -229,10 +230,6 @@ export default function AboutSection() {
         }
 
         .ab-award-row {
-          display: flex;
-          align-items: baseline;
-          flex-wrap: wrap;
-          gap: 2px 0;
           font-size: 13px;
           line-height: 1.7;
           word-break: keep-all;
@@ -378,7 +375,7 @@ export default function AboutSection() {
         {/* ── 왼쪽: 인트로 + 다운로드 ── */}
         <div className="ab-left">
           <p className="ab-intro">
-            사용성과 구현을 고려한 화면 구조를 기획하며 대기업 시스템을 경험했고, 사이드 프로젝트에서 문제 발견과 검증, 테스트 반복 과정을 통해 효율적인 데이터 기반 의사결정 디자인 과정을 체득했습니다. 나아가 AI 기술을 실험하며, 변화하는 환경에 빠르게 적응하는 프로덕트 디자이너로서 혁신적인 사용자 경험을 만들어가고자 합니다.
+            UX 전략과 화면을 기획·설계하며 대기업 시스템 실무를 경험했고, 사이드 프로젝트에서는 문제 발견부터 검증·개선까지 반복하며 데이터 기반의 디자인 의사결정 과정을 체득했습니다. 나아가 AI 기술을 실험하며, 변화하는 환경에 빠르게 적응하는 디자이너로서 혁신적인 사용자 경험을 만들어가고자 합니다.
           </p>
           <a href="/resume.pdf" download="김재이_이력서.pdf" className="ab-download-btn">
             <span className="ab-download-inner">
@@ -410,9 +407,9 @@ export default function AboutSection() {
             <h3 className="ab-section-title">Highlight</h3>
             {AWARDS.map((a, i) => (
               <div key={i} className="ab-award-row">
-                <span className="ab-award-title">{a.title}</span>
-                {a.org && <span className="ab-award-meta">&nbsp;ㆍ&nbsp;{a.org}</span>}
-                <span className="ab-award-meta">&nbsp;ㆍ&nbsp;{a.date}</span>
+                <span className="ab-award-title">{a.title}</span>{" "}
+                {a.org && <><span className="ab-award-meta">ㆍ&nbsp;{a.org}</span>{" "}</>}
+                <span className="ab-award-meta">ㆍ&nbsp;{a.date}</span>
               </div>
             ))}
           </div>
