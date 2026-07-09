@@ -20,7 +20,7 @@ const AWARDS = [
 
 const SKILLS: Record<string, string[]> = {
   Design: ["Figma", "Photoshop", "Illustrator", "Premiere pro"],
-  AI: ["Claude code", "Cursor", "Open AI", "Lovable", "Gemini"],
+  AI: ["Claude code", "Cursor", "Open AI", "Lovable", "Gemini", "Antigravity"],
   Document: ["Powerpoint", "Ms Excel", "Spreadsheet", "Notion"],
 };
 
