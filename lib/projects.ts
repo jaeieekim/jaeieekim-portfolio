@@ -27,7 +27,7 @@ export const PROJECTS: Project[] = [
     type: "Team project",
     period: "25.08  ·  개발 및 배포 완료",
     summary:
-      "의류 케어 라벨을 분석해서 세탁과 의류 관리 방법을 쉽게 안내해주는 AI 세탁 도우미 서비스입니다. ai 포텐데이 해커톤 프로젝트로 1위를 수상했습니다.",
+      "의류 케어 라벨을 분석해서 세탁과 의류 관리 방법을 쉽게 안내해주는 AI 세탁 도우미 서비스입니다. AI 포텐데이 해커톤 프로젝트로 1위를 수상했습니다.",
     image: "/images/projects/laundry-leader.png",
     blocks: [
       { type: "image", src: "/images/projects/laundry-01.png" },
@@ -138,6 +138,18 @@ export const PROJECTS: Project[] = [
       "UX 문구가 고민될 때, AI가 자동으로 라이팅 문구를 생성해주고 활용 시안을 함께 보여주는 서비스입니다. 클로드에서 이용할 수 있습니다.",
     image: "/images/projects/ux-writing.png",
     serviceLink: "https://claude.ai/public/artifacts/3c0b7c6a-5424-496e-8cdf-eac4cd65ceeb",
+    hideDetail: true,
+  },
+  {
+    slug: "07",
+    idx: "07",
+    name: "조각 투두",
+    type: "AI experiment",
+    period: "26.07.16 — 진행중",
+    summary:
+      "할 일을 입력하면 시작하기 쉽도록 3분 이내로 실행할 수 있는 작은 행동으로 쪼개주는 투두리스트 서비스입니다.",
+    image: "/images/projects/jogak-todo.png",
+    serviceLink: "https://jogak-todo.vercel.app/onboarding",
     hideDetail: true,
   },
 ];
