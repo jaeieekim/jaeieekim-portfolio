@@ -30,6 +30,7 @@ export const PROJECTS: Project[] = [
       "의류 케어 라벨을 분석해서 세탁과 의류 관리 방법을 쉽게 안내해주는 AI 세탁 도우미 서비스입니다. AI 포텐데이 해커톤 프로젝트로 1위를 수상했습니다.",
     image: "/images/projects/laundry-leader.png",
     blocks: [
+      { type: "image", src: "/images/projects/laundry-00.png" },
       { type: "image", src: "/images/projects/laundry-01.png" },
       { type: "image", src: "/images/projects/laundry-02.png" },
       { type: "image", src: "/images/projects/laundry-03.png" },
