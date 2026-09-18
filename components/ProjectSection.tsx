@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { PROJECTS } from "@/lib/projects";
 
 const FILTERS = ["All", "Team project", "Personal project", "Work", "AI experiment"] as const;
@@ -34,6 +35,7 @@ function ArrowUpRightIcon() {
 }
 
 export default function ProjectSection() {
+  const router = useRouter();
   const [active, setActive] = useState<FilterType>("All");
 
   const visible =
@@ -113,6 +115,9 @@ export default function ProjectSection() {
           transform: scale(1.015);
           border-color: var(--color-accent);
         }
+        .ps-card-clickable {
+          cursor: pointer;
+        }
 
         .ps-thumb {
           width: 100%;
@@ -190,6 +195,7 @@ export default function ProjectSection() {
         .ps-card-actions {
           display: flex;
           flex-direction: row;
+          flex-wrap: wrap;
           gap: 8px;
           padding: 8px 16px 16px;
           margin-top: auto;
@@ -210,6 +216,7 @@ export default function ProjectSection() {
           border: 1px solid rgba(10, 10, 10, 0.15);
           text-decoration: none;
           white-space: nowrap;
+          flex: 1 1 0;
         }
         .ps-btn-project {
           background: #0a0a0a;
@@ -291,7 +298,7 @@ export default function ProjectSection() {
             padding: 8px 24px 24px;
           }
           .ps-btn {
-            flex: none;
+            flex: 1 1 0;
           }
         }
       `}</style>
@@ -314,7 +321,14 @@ export default function ProjectSection() {
       {/* Project grid */}
       <div className="ps-grid">
         {visible.map((p) => (
-          <div key={p.idx} className="ps-card">
+          <div
+            key={p.idx}
+            className={`ps-card${!p.hideDetail || p.serviceLink ? " ps-card-clickable" : ""}`}
+            onClick={() => {
+              if (!p.hideDetail) router.push(`/project/${p.slug}`);
+              else if (p.serviceLink) window.open(p.serviceLink, "_blank", "noopener,noreferrer");
+            }}
+          >
             {p.image
               ? <img src={p.image} alt={p.name} className="ps-thumb" />
               : <div className="ps-thumb" />
@@ -330,13 +344,23 @@ export default function ProjectSection() {
             </div>
             <div className="ps-card-actions">
               {!p.hideDetail && (
-                <Link href={`/project/${p.slug}`} className="ps-btn ps-btn-project">
+                <Link
+                  href={`/project/${p.slug}`}
+                  className="ps-btn ps-btn-project"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <span className="ps-btn-inner"><FolderIcon />프로젝트</span>
                   <ArrowUpRightIcon />
                 </Link>
               )}
               {p.serviceLink && (
-                <a href={p.serviceLink} target="_blank" rel="noopener noreferrer" className="ps-btn ps-btn-service">
+                <a
+                  href={p.serviceLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ps-btn ps-btn-service"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <span className="ps-btn-inner"><LinkIcon />서비스 링크</span>
                   <ArrowUpRightIcon />
                 </a>
