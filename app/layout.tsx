@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import HamburgerMenu from "@/components/HamburgerMenu";
 
 export const metadata: Metadata = {
   title: "JaeieeKim Portfolio",
@@ -30,7 +29,6 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <HamburgerMenu />
         {children}
       </body>
     </html>
