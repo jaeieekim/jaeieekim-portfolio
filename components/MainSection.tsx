@@ -179,7 +179,7 @@ export default function MainSection() {
             bottom: 264px;
           }
           .ms-cta {
-            bottom: 148px;
+            bottom: 156px;
           }
         }
 
