@@ -178,8 +178,12 @@ export default function MainSection() {
           .ms-analytics {
             bottom: 264px;
           }
+          /* 실제로 보이는 화면 아래 끝(주소창·하단바가 떠 있을 때)에서 32 위 + 홈 바·제스처 막대 높이
+             메인 높이(100vh)와 보이는 높이(100svh)의 차이를 더해 바에 가려지지 않게 함
+             이 기능을 모르는 예전 브라우저는 156 그대로 */
           .ms-cta {
             bottom: 156px;
+            bottom: calc(100vh - 100svh + 32px + env(safe-area-inset-bottom, 0px));
           }
         }
 
