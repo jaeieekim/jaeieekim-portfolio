@@ -34,7 +34,7 @@ function FolderIcon() {
 
 function LinkIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M9 17H7A5 5 0 0 1 7 7h2"/>
       <path d="M15 7h2a5 5 0 1 1 0 10h-2"/>
       <line x1="11" y1="12" x2="13" y2="12"/>
@@ -239,13 +239,53 @@ export default async function ProjectPage({ params }: Props) {
           color: #ffffff;
         }
         .pd-btn-primary:hover { color: var(--color-accent); }
-        .pd-btn-secondary {
-          background: var(--color-badge-bg);
-          color: #555555;
+        /* 서비스 링크 — 메인 프로젝트 카드 호버 버튼과 동일 */
+        .pd-service-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 14px;
+          padding: 8px 24px;
+          border-radius: var(--glass-radius-pill);
+          font-size: 14px;
+          font-weight: 500;
+          font-family: var(--font-display);
+          cursor: pointer;
+          text-decoration: none;
+          white-space: nowrap;
+          width: fit-content;
+          border: 1.5px solid #555555;
+          background-color: transparent;
+          transition: border-color 0.2s ease;
         }
-        .pd-btn-secondary:hover {
-          background: #DAE0E6;
-          border-color: var(--color-accent);
+        @keyframes pd-shimmer-ltr {
+          from { background-position: 100% 50%; }
+          to { background-position: 0% 50%; }
+        }
+        .pd-service-label {
+          background-image: linear-gradient(90deg, #0a0a0a 0%, #999999 25%, #0a0a0a 50%, #999999 75%, #0a0a0a 100%);
+          background-size: 200% 100%;
+          background-clip: text;
+          -webkit-background-clip: text;
+          color: transparent;
+          animation: pd-shimmer-ltr 3s linear infinite;
+        }
+        .pd-service-btn svg {
+          color: #0a0a0a;
+          flex-shrink: 0;
+          transition: color 0.2s ease;
+        }
+        .pd-service-btn:hover {
+          border-color: #0083f2;
+        }
+        .pd-service-btn:hover .pd-service-label {
+          background-image: none;
+          animation: none;
+          color: #0083f2;
+          -webkit-text-fill-color: #0083f2;
+        }
+        .pd-service-btn:hover svg {
+          color: #0083f2;
         }
 
         @media (min-width: 640px) {
@@ -258,6 +298,11 @@ export default async function ProjectPage({ params }: Props) {
           }
 
           .pd-title { font-size: 44px; }
+          .pd-service-btn {
+            font-size: 17px;
+            padding: 12px 32px;
+            gap: 20px;
+          }
           .pd-summary { font-size: 18px; }
         }
       `}</style>
@@ -293,10 +338,9 @@ export default async function ProjectPage({ params }: Props) {
               </a>
             )}
             {project.serviceLink && (
-              <a href={project.serviceLink} target="_blank" rel="noopener noreferrer" className="pd-btn pd-btn-secondary">
+              <a href={project.serviceLink} target="_blank" rel="noopener noreferrer" className="pd-service-btn">
+                <span className="pd-service-label">Service link</span>
                 <LinkIcon />
-                서비스 링크
-                <ArrowUpRightIcon />
               </a>
             )}
           </div>

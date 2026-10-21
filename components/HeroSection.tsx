@@ -203,6 +203,25 @@ export default function HeroSection() {
     setPushMap(c.toDataURL());
   }, []);
 
+  // 파동 중심을 메인 문구("일상 속 ~ 김재이입니다.")의 세로 가운데에 맞춤
+  // 파동 층 크기는 그대로 두고 아래 안쪽 여백으로 중심만 올림 → 커서 밀림 좌표는 그대로
+  useEffect(() => {
+    const align = () => {
+      const layer = rippleLayerRef.current;
+      const root = rootRef.current;
+      const headline = document.querySelector<HTMLElement>(".ms-headline h1");
+      if (!layer || !root || !headline) return;
+      const r = root.getBoundingClientRect();
+      const h = headline.getBoundingClientRect();
+      const lift = r.height / 2 - (h.top + h.height / 2 - r.top);
+      layer.style.paddingBottom = `${Math.max(0, lift * 2)}px`;
+    };
+    align();
+    window.addEventListener("resize", align);
+    document.fonts?.ready.then(align);
+    return () => window.removeEventListener("resize", align);
+  }, []);
+
   useEffect(() => {
     if (!pushMap) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -308,6 +327,7 @@ export default function HeroSection() {
         .hs-ripple-layer {
           position: absolute;
           inset: 0;
+          box-sizing: border-box;
           will-change: transform;
           display: flex;
           align-items: center;

@@ -170,6 +170,19 @@ export default function MainSection() {
           animation: gradientFlow 3s linear infinite;
         }
 
+        /* ── 폰(<640px): 문구 60px·애널리틱스·버튼 100px 위로 (파동 중심은 문구 가운데를 따라감) ── */
+        @media (max-width: 639px) {
+          .ms-headline {
+            top: max(120px, calc(50vh - 188px)); /* 120 아래로는 상태 문구와 겹쳐서 멈춤 */
+          }
+          .ms-analytics {
+            bottom: 264px;
+          }
+          .ms-cta {
+            bottom: 148px;
+          }
+        }
+
         /* ── Desktop (≥640px) ── */
         @media (min-width: 640px) {
           .ms-headline {

@@ -34,6 +34,16 @@ export default function ProjectSection() {
   const staticFiltersRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const [floatShown, setFloatShown] = useState(false);
+  // 터치 기기: 처음엔 목업만, 카드를 한 번 누르면 정보 화면이 열림 (한 번에 하나)
+  const [touchOpen, setTouchOpen] = useState<string | null>(null);
+  useEffect(() => {
+    if (touchOpen === null) return;
+    const close = (e: PointerEvent) => {
+      if (!(e.target as HTMLElement).closest(".ps-card")) setTouchOpen(null);
+    };
+    document.addEventListener("pointerdown", close);
+    return () => document.removeEventListener("pointerdown", close);
+  }, [touchOpen]);
 
   // 배경 모서리 원형 그라데이션: 프로젝트 섹션 시작이 화면 가운데보다 위로 올라오면 보이고, 메인이 화면 절반 이상이면 숨김
   useEffect(() => {
@@ -96,6 +106,7 @@ export default function ProjectSection() {
         className={`ps-filter-btn${active === f ? " active" : ""}`}
         onClick={() => {
           setActive(f);
+          setTouchOpen(null);
           // 섹션 위 여백(160px)까지 보이지 않도록 제목이 화면 위에서 40px(모바일 24px)에 오게 맞춤
           const heading = document.querySelector<HTMLElement>(".ps-heading");
           if (heading) {
@@ -372,12 +383,19 @@ export default function ProjectSection() {
           background: rgba(255, 255, 255, 0.55);
           backdrop-filter: blur(22px);
           -webkit-backdrop-filter: blur(22px);
-          opacity: 1;
+          /* 기본은 숨김(목업이 보임). 커서 기기는 호버, 터치 기기는 카드를 눌러 열었을 때 보임 */
+          opacity: 0;
+          pointer-events: none;
           transition: opacity 0.25s ease;
         }
+        .ps-card.is-touch-open .ps-card-overlay {
+          opacity: 1;
+          pointer-events: auto;
+        }
         @media (hover: hover) and (pointer: fine) {
-          .ps-card-overlay {
-            opacity: 0;
+          .ps-card:hover .ps-card-overlay,
+          .ps-card:focus-within .ps-card-overlay {
+            pointer-events: auto;
           }
           .ps-card:hover .ps-card-overlay,
           .ps-card:focus-within .ps-card-overlay {
@@ -590,13 +608,18 @@ export default function ProjectSection() {
           return (
           <div
             key={p.idx}
-            className={`ps-card${p.cardImage ? " ps-card-exact" : ""}`}
+            className={`ps-card${p.cardImage ? " ps-card-exact" : ""}${touchOpen === p.idx ? " is-touch-open" : ""}`}
             style={{
               "--card-from": p.accentFrom,
               "--card-to": p.accentTo,
               animationDelay: `${Math.min(i, 6) * 45}ms`,
             } as CSSProperties}
             onClick={() => {
+              // 터치 기기에서 닫힌 카드를 누르면 먼저 정보 화면만 열기
+              if (window.matchMedia("(hover: none)").matches && touchOpen !== p.idx) {
+                setTouchOpen(p.idx);
+                return;
+              }
               if (!p.hideDetail) router.push(`/project/${p.slug}`);
               else if (p.serviceLink) window.open(p.serviceLink, "_blank", "noopener,noreferrer");
             }}
