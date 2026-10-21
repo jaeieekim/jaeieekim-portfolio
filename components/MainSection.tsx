@@ -26,6 +26,22 @@ export default function MainSection() {
       .catch(() => {});
   }, []);
 
+  // 보이는 화면이 짧아 애널리틱스가 문구에 닿으면 숨김 (주소창·하단바가 큰 폰 대비)
+  const [analyticsHidden, setAnalyticsHidden] = useState(false);
+  useEffect(() => {
+    const check = () => {
+      const card = document.querySelector<HTMLElement>(".ms-analytics");
+      const headline = document.querySelector<HTMLElement>(".ms-headline h1");
+      if (!card || !headline) return;
+      const gap = card.getBoundingClientRect().top - headline.getBoundingClientRect().bottom;
+      setAnalyticsHidden(gap < 24);
+    };
+    check();
+    window.addEventListener("resize", check);
+    document.fonts?.ready.then(check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   const scrollToProject = () => {
     document.getElementById("project")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -175,15 +191,24 @@ export default function MainSection() {
           .ms-headline {
             top: max(120px, calc(50vh - 188px)); /* 120 아래로는 상태 문구와 겹쳐서 멈춤 */
           }
-          .ms-analytics {
-            bottom: 264px;
-          }
-          /* 실제로 보이는 화면 아래 끝(주소창·하단바가 떠 있을 때)에서 32 위 + 홈 바·제스처 막대 높이
+          /* 버튼 위치: 실제로 보이는 화면 아래 끝(주소창·하단바가 떠 있을 때)에서 32 위 + 홈 바·제스처 막대 높이
              메인 높이(100vh)와 보이는 높이(100svh)의 차이를 더해 바에 가려지지 않게 함
              이 기능을 모르는 예전 브라우저는 156 그대로 */
+          .ms-root {
+            --ms-cta-bottom: 156px;
+          }
+          @supports (height: 100svh) {
+            .ms-root {
+              --ms-cta-bottom: calc(100vh - 100svh + 32px + env(safe-area-inset-bottom, 0px));
+            }
+          }
           .ms-cta {
-            bottom: 156px;
-            bottom: calc(100vh - 100svh + 32px + env(safe-area-inset-bottom, 0px));
+            bottom: var(--ms-cta-bottom);
+          }
+          /* 애널리틱스: 원래 자리(264)가 기본, 바 때문에 버튼이 올라오면 버튼 위 32 간격을 두고 같이 올라감
+             (버튼 높이 46 + 간격 32) */
+          .ms-analytics {
+            bottom: max(264px, calc(var(--ms-cta-bottom) + 78px));
           }
         }
 
@@ -230,7 +255,7 @@ export default function MainSection() {
       </div>
 
       {/* Analytics */}
-      <div className="ms-analytics">
+      <div className="ms-analytics" style={analyticsHidden ? { visibility: "hidden" } : undefined}>
         <p className="ms-analytics-label">Analytics</p>
         {[
           { label: "TODAY'S VIEWS", value: stats.today },
